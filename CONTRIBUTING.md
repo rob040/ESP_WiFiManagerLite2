@@ -1,14 +1,16 @@
-## Contributing to ESP_WiFiManager_Lite
+## Contributing to ESP_WiFiManagerLite2
 
 ### Reporting Bugs
 
-Please report bugs in [ESP_WiFiManager_Lite](https://github.com/khoih-prog/ESP_WiFiManager_Lite/issues/new) if you find them.
+Please report bugs in [ESP_WiFiManagerLite2](https://github.com/rob040/ESP_WiFiManagerLite2/issues/new) if you find them.
 
 However, before reporting a bug please check through the following:
 
-* [Existing Open Issues](https://github.com/khoih-prog/ESP_WiFiManager_Lite/issues) - someone might have already encountered this.
+* [Existing Open or Closed Issues in archived khoih-prog/ESP_WiFiManager_Lite](https://github.com/khoih-prog/ESP_WiFiManager_Lite/issues)
+* [Existing Open or Closed Issues](https://github.com/rob040/ESP_WiFiManagerLite2/issues)
+   - someone might have already encountered this.
 
-If you don't find anything, please [open a new issue](https://github.com/khoih-prog/ESP_WiFiManager_Lite/issues/new).
+If you don't find anything, please [open a new issue](https://github.com/rob040/ESP_WiFiManagerLite2/issues/new).
 
 ---
 
@@ -52,7 +54,7 @@ Steps to reproduce:
 
 Feel free to post feature requests. It's helpful if you can explain exactly why the feature would be useful.
 
-There are usually some outstanding feature requests in the [existing issues list](https://github.com/khoih-prog/ESP_WiFiManager_Lite/issues?q=is%3Aopen+is%3Aissue+label%3Aenhancement), feel free to add comments to them.
+There are usually some outstanding feature requests in the [existing issues list](https://github.com/rob040/ESP_WiFiManagerLite2/issues?q=is%3Aopen+is%3Aissue+label%3Aenhancement), feel free to add comments to them.
 
 ---
 
@@ -65,14 +67,14 @@ Please use the `astyle` to reformat the updated library code as follows (demo fo
 1. Change directory to the library GitHub
 
 ```
-xy@xy-Inspiron-3593:~$ cd Arduino/xy/ESP_WiFiManager_Lite_GitHub/
-xy@xy-Inspiron-3593:~/Arduino/xy/ESP_WiFiManager_Lite_GitHub$
+xy@xy-Inspiron-3593:~$ cd Arduino/xy/ESP_WiFiManagerLite2_GitHub/
+xy@xy-Inspiron-3593:~/Arduino/xy/ESP_WiFiManagerLite2_GitHub$
 ```
 
 2. Issue astyle command
 
 ```
-xy@xy-Inspiron-3593:~/Arduino/xy/ESP_WiFiManager_Lite_GitHub$ bash utils/restyle.sh
+xy@xy-Inspiron-3593:~/Arduino/xy/ESP_WiFiManagerLite2_GitHub$ bash utils/restyle.sh
 ```
 
 

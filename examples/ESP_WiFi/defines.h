@@ -2,12 +2,12 @@
   defines.h
   For ESP8266 / ESP32 boards
 
-  ESP_WiFiManager_Lite (https://github.com/khoih-prog/ESP_WiFiManager_Lite) is a library 
-  for the ESP32/ESP8266 boards to enable store Credentials in EEPROM/SPIFFS/LittleFS for easy 
-  configuration/reconfiguration and autoconnect/autoreconnect of WiFi and other services without Hardcoding.
+  ESP_WiFiManager_Lite (https://github.com/rob040/ESP_WiFiManagerLite2) is a library
+  for the ESP32/ESP8266 boards to enable store Credentials in EEPROM/SPIFFS/LittleFS for easy
+  (re-)configuration and auto(re-)connect of WiFi and other services without Hardcoding.
 
-  Built by Khoi Hoang https://github.com/khoih-prog/ESP_WiFiManager_Lite
-  Licensed under MIT license      
+  Originally built by Khoi Hoang https://github.com/khoih-prog/ESP_WiFiManager_Lite (Archived)
+  Licensed under MIT license
  *****************************************************************************************************************************/
 
 #ifndef defines_h
@@ -25,63 +25,37 @@
 // use builtin LED to show configuration mode
 #define USE_LED_BUILTIN               true
 
-#define USING_MRD                     true
+#define MULTIRESETDETECTOR_DEBUG      true
 
-#if USING_MRD
-  #define MULTIRESETDETECTOR_DEBUG      true
-  
-  // Number of seconds after reset during which a
-  // subseqent reset will be considered a double reset.
-  #define MRD_TIMEOUT                   10
-  
-  // RTC Memory Address for the DoubleResetDetector to use
-  #define MRD_ADDRESS                   0
+// Number of seconds after reset during which a
+// subseqent reset will be considered a double reset.
+#define MRD_TIMEOUT                   10
 
-  #if (_ESP_WM_LITE_LOGLEVEL_ > 3)
-    #warning Using MULTI_RESETDETECTOR
-  #endif
-#else
-  #define DOUBLERESETDETECTOR_DEBUG     true
-  
-  // Number of seconds after reset during which a
-  // subseqent reset will be considered a double reset.
-  #define DRD_TIMEOUT                   10
-  
-  // RTC Memory Address for the DoubleResetDetector to use
-  #define DRD_ADDRESS                   0
+// RTC Memory Address for the DoubleResetDetector to use
+#define MRD_ADDRESS                   0
 
-  #if (_ESP_WM_LITE_LOGLEVEL_ > 3)
-    #warning Using DOUBLE_RESETDETECTOR
-  #endif
-#endif
 
 /////////////////////////////////////////////
 
-// LittleFS has higher priority than SPIFFS
-#if ( defined(ESP_ARDUINO_VERSION_MAJOR) && (ESP_ARDUINO_VERSION_MAJOR >= 2) )
-  #define USE_LITTLEFS    true
-  #define USE_SPIFFS      false
-#elif defined(ARDUINO_ESP32C3_DEV)
-  // For core v1.0.6-, ESP32-C3 only supporting SPIFFS and EEPROM. To use v2.0.0+ for LittleFS
-  #define USE_LITTLEFS          false
-  #define USE_SPIFFS            true
-#else
-  // For ESP8266, and other boards
-  #define USE_LITTLEFS    true
-  #define USE_SPIFFS      false  
-#endif
+// WML configuration storage; Choose one and only one
+#define USE_EEPROM                                true
+#define USE_LITTLEFS                              false
+#define USE_SPIFFS                                false
 
 /////////////////////////////////////////////
 
-// Add customs headers from v1.2.0
-#define USING_CUSTOMS_STYLE           true
-#define USING_CUSTOMS_HEAD_ELEMENT    true
+// Add custom headers from v1.2.0
+#define USING_CUSTOM_STYLE           true
+#define USING_CUSTOM_HEAD_ELEMENT    true
 #define USING_CORS_FEATURE            true
 
 /////////////////////////////////////////////
 
 // Force some params
 #define TIMEOUT_RECONNECT_WIFI                    10000L
+
+// set to true for debug-test: FORCES default values to be loaded each run.
+#define LOAD_DEFAULT_CONFIG_DATA                  false
 
 // Permit running CONFIG_TIMEOUT_RETRYTIMES_BEFORE_RESET times before reset hardware
 // to permit user another chance to config. Only if Config Data is valid.
@@ -104,7 +78,7 @@
 // Default 1 if not defined, and minimum 1.
 #define MAX_NUM_WIFI_RECON_TRIES_PER_LOOP     2
 
-// Default no interval between recon WiFi if lost
+// Default no interval between reconnect WiFi if lost
 // Max permitted interval will be 10mins
 // Uncomment to use. Be careful, WiFi reconnect will be delayed if using this method
 // Only use whenever urgent tasks in loop() can't be delayed. But if so, it's better you have to rewrite your code, e.g. using higher priority tasks.
@@ -128,7 +102,7 @@
 
 // From 2-15
   #define MAX_SSID_IN_LIST                  8
-  
+
 /////////////////////////////////////////////
 
 // Optional, to use Board Name in Menu
@@ -138,7 +112,7 @@
 
 #include <ESP_WiFiManager_Lite.h>
 
-#if ESP8266 
+#if ESP8266
   #define HOST_NAME   "ESP8266-Controller"
 #else
   #define HOST_NAME   "ESP32-Controller"

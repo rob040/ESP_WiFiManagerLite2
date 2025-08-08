@@ -1,13 +1,11 @@
 ## ESP_WiFiManager_Lite (Light Weight Credentials / WiFiManager for ESP32/ESP8266)
 
 [![arduino-library-badge](https://www.ardu-badge.com/badge/ESP_WiFiManager_Lite.svg?)](https://www.ardu-badge.com/ESP_WiFiManager_Lite)
-[![GitHub release](https://img.shields.io/github/release/khoih-prog/ESP_WiFiManager_Lite.svg)](https://github.com/khoih-prog/ESP_WiFiManager_Lite/releases)
-[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/khoih-prog/ESP_WiFiManager_Lite/blob/main/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/khoih-prog/ESP_WiFiManager_Lite.svg)](https://github.com/rob040/ESP_WiFiManagerLite2/releases)
+[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/rob040/ESP_WiFiManagerLite2/blob/main/LICENSE)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](#Contributing)
-[![GitHub issues](https://img.shields.io/github/issues/khoih-prog/ESP_WiFiManager_Lite.svg)](http://github.com/khoih-prog/ESP_WiFiManager_Lite/issues)
+[![GitHub issues](https://img.shields.io/github/issues/khoih-prog/ESP_WiFiManager_Lite.svg)](http://github.com/rob040/ESP_WiFiManagerLite2/issues)
 
-<a href="https://www.buymeacoffee.com/khoihprog6" title="Donate to my libraries using BuyMeACoffee"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Donate to my libraries using BuyMeACoffee" style="height: 50px !important;width: 181px !important;" ></a>
-<a href="https://www.buymeacoffee.com/khoihprog6" title="Donate to my libraries using BuyMeACoffee"><img src="https://img.shields.io/badge/buy%20me%20a%20coffee-donate-orange.svg?logo=buy-me-a-coffee&logoColor=FFDD00" style="height: 20px !important;width: 200px !important;" ></a>
 
 ---
 ---
@@ -15,6 +13,7 @@
 ## Table of Contents
 
 * [Changelog](#changelog)
+  * [Release v1.11.0](#release-v1110-beta)
   * [Release v1.10.5](#release-v1105)
   * [Release v1.10.4](#release-v1104)
   * [Release v1.10.3](#release-v1103)
@@ -39,6 +38,24 @@
 ---
 
 ## Changelog
+
+### Release v1.11.0 (beta)
+
+See this as a pre version 2 of this library (not expected in 2025)
+
+1. Massive simplification to reset detector configuration
+2. Using the simplified MultiResetDetector v2.0, makes the DoubleResetDetector library superfluous, hence, DRD option was removed, and MRD is now included in this library.
+3. Replaced everywhere "Customs" with "Custom" (spelling error introduced in v1.2.0). This affects users with configurable **Custom HTML Headers**, including Custom Style and Custom Head Elements.
+4. Flexible number of wifi credentials NUM_WIFI_CREDENTIALS; now supports 1...n configurable WiFi SSID's
+5. Reviewed / changed html generation
+6. Compile warnings removed; configuration messages as warnings only at log level > 3
+
+BREAKING Changes:
+1. Renamed "Customs" to "Custom"
+2. Renamed loadAndSaveDefaultConfigData() method to restoreDefaultConfiguration()
+
+Known Issues:
+- None yet...
 
 ### Release v1.10.5
 
@@ -90,14 +107,14 @@
 
 ### Release v1.7.0
 
-1. Fix ESP8266 bug not easy to connect to Config Portal for ESP8266 core v3.0.0+ 
+1. Fix ESP8266 bug not easy to connect to Config Portal for ESP8266 core v3.0.0+
 2. Fix the blocking issue in loop(). Check [retries block the main loop #18](https://github.com/khoih-prog/WiFiManager_NINA_Lite/issues/18)
 3. Configurable `WIFI_RECON_INTERVAL`. Check [retries block the main loop #18](https://github.com/khoih-prog/WiFiManager_NINA_Lite/issues/18#issuecomment-1006197561)
 4. Clean up
 
 ### Release v1.6.0
 
-1. Auto detect ESP32 core and use either built-in LittleFS or [LITTLEFS](https://github.com/lorol/LITTLEFS) library. 
+1. Auto detect ESP32 core and use either built-in LittleFS or [LITTLEFS](https://github.com/lorol/LITTLEFS) library.
 2. Fix bug returning IP `255.255.255.255` in core v2.0.0+ when using `hostname`
 
 
@@ -113,8 +130,8 @@
 
 ### Release v1.4.0
 
-1. Add **LittleFS and SPIFFS** support to new **ESP32-S2** boards (**Arduino ESP32C3_DEV**). Check [HOWTO Install esp32 core for ESP32-S2 (Saola, AI-Thinker ESP-12K) and ESP32-C3 boards into Arduino IDE](#howto-install-esp32-core-for-esp32-s2-saola-ai-thinker-esp-12k-and-esp32-c3-boards-into-arduino-ide).
-2. Add **EEPROM and SPIFFS** support to new **ESP32-C3** boards (**Arduino ESP32C3_DEV**). Check [HOWTO Install esp32 core for ESP32-S2 (Saola, AI-Thinker ESP-12K) and ESP32-C3 boards into Arduino IDE](#howto-install-esp32-core-for-esp32-s2-saola-ai-thinker-esp-12k-and-esp32-c3-boards-into-arduino-ide).
+1. Add **LittleFS and SPIFFS** support to new **ESP32-S2** boards (**Arduino ESP32C3_DEV**). Check [HOWTO Install esp32 core for ESP32-S2 (Saola, AI-Thinker ESP-12K) and ESP32-C3 boards into Arduino IDE](README.md#howto-install-esp32-core-for-esp32-s2-saola-ai-thinker-esp-12k-and-esp32-c3-boards-into-arduino-ide).
+2. Add **EEPROM and SPIFFS** support to new **ESP32-C3** boards (**Arduino ESP32C3_DEV**). Check [HOWTO Install esp32 core for ESP32-S2 (Saola, AI-Thinker ESP-12K) and ESP32-C3 boards into Arduino IDE](README.md#howto-install-esp32-core-for-esp32-s2-saola-ai-thinker-esp-12k-and-esp32-c3-boards-into-arduino-ide).
 
 ### Release v1.3.0
 
@@ -127,13 +144,13 @@
 ### Release v1.2.0
 
 1. Configurable **Customs HTML Headers**, including Customs Style, Customs Head Elements, CORS Header.
-2. Fix Config Portal Bug. 
+2. Fix Config Portal Bug.
 3. Update examples
 
 ### Release v1.1.0
 
 1. Add support to **ESP32-S2 (ESP32-S2 Saola and AI-Thinker ESP-12K)**
-2. Add [**Instructions to install ESP32-S2 core**](#howto-install-esp32-s2-core-for-esp32-s2-saola-ai-thinker-esp-12k-boards-into-arduino-ide)
+2. Add [**Instructions to install ESP32-S2 core**](README.md#howto-install-esp32-s2-core-for-esp32-s2-saola-ai-thinker-esp-12k-boards-into-arduino-ide)
 
 ### Release v1.0.0
 

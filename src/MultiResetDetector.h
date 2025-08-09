@@ -45,7 +45,8 @@
   1.3.1   K Hoang      04/03/2022 Add waitingForMRD() function to signal in MRD waiting period
   1.3.2   K Hoang      09/09/2022 Fix ESP32 chipID for example ConfigOnMultiReset
   2.0.0   rob040       2025-07-22 Massive reduction in (configuration) complexity: use RAM storage only
-  2.0.0   rob040       2025-07-30 Renamed "Bytes" to "Word", place debug strings into PROGMEM
+                                  Renamed "Bytes" to "Word", place debug strings into PROGMEM
+                                  Renamed ESP_MultiResetDetector to MultiResetDetector.h included as part of https://github.com/rob040/ESP_WiFiManagerLite2
 *****************************************************************************************************************************/
 
 #pragma once
@@ -91,19 +92,16 @@
 ///////////////////
 
 // Flag clear to 0xFFFE0001 if no MRD within MRD_TIMEOUT. Flag will increase 1 for each reset within MRD_TIMEOUT
-// Will use the inverted upper 2 bytes to check for valid data.
+// The upper word is the inverse of the lower word for data validation and less likely .
 #define multiResetDetectorFlag_BEGIN  0xFFFE0001     // Used when beginning a new cycle
 
 ///////////////////
-#ifdef MRD_ALLOCATE_STATIC_DATA
+
 #ifdef ESP8266
 //RTC only for ESP8266
 #else
-// RAM storage for ESP32, not affected by application reset (?)
+// RAM storage for ESP32, not affected by application reset
 __NOINIT_ATTR uint32_t noinit_multiResetDetectorFlag;
-#endif
-#else
-extern __NOINIT_ATTR uint32_t noinit_multiResetDetectorFlag;
 #endif
 
 ///////////////////
@@ -217,9 +215,6 @@ class MultiResetDetector
     void setRecentlyResetFlag()
     {
       // Add 1 every time detecting a reset
-      // To read first, increase and update 2 checking bytes
-      //readRecentlyResetFlag();
-
       multiResetDetectorFlag += 1;
       multiResetDetectorFlag = ((~multiResetDetectorFlag) << 16) | (multiResetDetectorFlag & 0xFFFF);
 

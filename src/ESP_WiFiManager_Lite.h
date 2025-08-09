@@ -75,13 +75,13 @@
 ///////////////////////////////////////////
 
 #ifndef ESP_WIFI_MANAGER_LITE_VERSION
-  #define ESP_WIFI_MANAGER_LITE_VERSION             "ESP_WiFiManager_Lite v1.11.0"
+  #define ESP_WIFI_MANAGER_LITE_VERSION             "ESP_WiFiManager_Lite v2.0.0-rc1"
 
-  #define ESP_WIFI_MANAGER_LITE_VERSION_MAJOR       1
-  #define ESP_WIFI_MANAGER_LITE_VERSION_MINOR       11
+  #define ESP_WIFI_MANAGER_LITE_VERSION_MAJOR       2
+  #define ESP_WIFI_MANAGER_LITE_VERSION_MINOR       0
   #define ESP_WIFI_MANAGER_LITE_VERSION_PATCH       0
 
-  #define ESP_WIFI_MANAGER_LITE_VERSION_INT         1011000
+  #define ESP_WIFI_MANAGER_LITE_VERSION_INT         2000000
 #endif
 
 ///////////////////////////////////////////
@@ -208,16 +208,16 @@
 ///////////////////////////////////////////
 
 #include <DNSServer.h>
-#include <memory>
-#undef min
-#undef max
-#include <algorithm>
+//#include <memory>
+//#undef min
+//#undef max
+//#include <algorithm>
 
 #ifdef ESP8266
-extern "C"
-{
-#include "user_interface.h"
-}
+//extern "C"
+//{
+//#include "user_interface.h"
+//}
 
 #define ESP_getChipId()   (ESP.getChipId())
 
@@ -271,7 +271,7 @@ uint32_t getChipOUI();
 #endif
 
 
-// These defines must be put before #include <ESP_MultiResetDetector.h>
+// These defines must be put before #include "MultiResetDetector.h"
 // The MultiResetDetector's variable is stored in Volatile memory that is not
 // erased by chip reset or application start; it is never stored in
 // non-volatile flash storage, like it was before version 1.11.
@@ -280,7 +280,7 @@ uint32_t getChipOUI();
   #define MULTIRESETDETECTOR_DEBUG     false
 #endif
 
-// These definitions must be placed before #include <ESP_MultiResetDetector.h> to be used
+// These definitions must be placed before #include "MultiResetDetector.h" to be used
 // Otherwise, default values (MRD_TIMES = 3, MRD_TIMEOUT = 10 seconds and MRD_ADDRESS = 0) will be used
 // Number of subsequent resets during MRD_TIMEOUT to activate
 #ifndef MRD_TIMES
@@ -298,11 +298,8 @@ uint32_t getChipOUI();
   #define MRD_ADDRESS 0
 #endif
 
-#define MRD_ALLOCATE_STATIC_DATA
 
-#include <ESP_MultiResetDetector.h>      // https://github.com/rob040/LEDmatrixClock/lib/ESP_MultiResetDetector
-
-#undef MRD_ALLOCATE_STATIC_DATA
+#include "MultiResetDetector.h"
 
 //MultiResetDetector mrd(MRD_TIMEOUT, MRD_ADDRESS);
 MultiResetDetector* mrd;
